@@ -5,4 +5,8 @@ This project investigated the probabilty of an IVF patient having an embryo suit
 
 The models developed in this project were built and validated using the anonymised register of IVF cycles maintained by the Human Fertilisation and Embryology Authority (HFEA). This data is available [freely online](https://www.hfea.gov.uk/about-us/our-data/) to researchers.
 
+# Disclaimer
+
+The models and respective predictions in this repository are not clinically validated. We do not suggest the use of them in rountine clinical practice until they have been appropiately validated. 
+
 # Citation
