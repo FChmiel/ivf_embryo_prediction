@@ -1,62 +1,30 @@
 """
-A set of utlity functions used throughout the IVF project.
+A set of utlity functions used throughout the ivf_embryo_prediction.
 
-F. P. Chmiel, IT Innovation centre 2020
+ivf_embryo_prediction, Machine-learnt models for predicting chance
+of suitable embryo for D5 transfer or freezing.
+
+Copyright (C) 2020  F. P. Chmiel
+
+Email: F.P.Chmiel@soton.ac.uk
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 import warnings
-
-def objects_to_int(x):
-    """
-    Converts all elements of x to an integer. 
-
-    Parameters:
-    -----------
-    x, Iterable{float,str,int} or float
-        An iterable containing numeric values or a float.
-
-    Returns:
-    --------
-    x, list{int, NaN}
-        The converted iterable or float.
-    """
-    if type(x)==float:
-        try:
-            x = [int(x)]
-        except:
-            x = []
-    else:
-        try:
-            x = [int(i) for i in x]
-        except:
-            x = []
-            warnings.warn('x is neither an iterable or float, returning NaN')
-    return x
-
-def follicle_summary(follicles, cutoff=10):
-    """
-    Given a list of follicles diameters return the mean diameter, number of 
-    follicles and the percent above the cutoff diameter.
-
-    Parameters:
-    ----------
-    follicles, list
-        A list of the measured follicle diameters.
-
-    cutoff, {float, int}
-        The minimum follicle diameter (in mm) considered to be viable for
-        successful egg collection.
-    """
-    follicles = np.array(follicles)
-    fols_above_cut_off = follicles[follicles > cutoff]
-    mean = np.mean(fols_above_cut_off)
-    total_count = len(follicles)
-    above_count = len(fols_above_cut_off) # num above cutoff size
-    percent  =  above_count / total_count        
-    return [mean, above_count, percent]
-
 
 def remove_axes(ax):
     """
@@ -82,7 +50,6 @@ def change_ticks_fontsize(ax, size=7):
     """
     plt.setp(ax.get_xticklabels(), fontsize=size)
     plt.setp(ax.get_yticklabels(), fontsize=size)
-
 
 def confidence_intervals(scores, alpha=0.95):
     """
