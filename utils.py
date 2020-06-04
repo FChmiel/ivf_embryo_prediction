@@ -75,3 +75,96 @@ def confidence_intervals(scores, alpha=0.95):
     lower_percentile = (alpha+((1.0-alpha)/2.0)) * 100
     upper = np.percentile(scores, lower_percentile)
     return lower, upper
+
+    def plot_line_with_confidence(x, 
+                              y, 
+                              err, 
+                              ax=None, 
+                              plot_params={}, 
+                              fill_params={},
+                              xlims=[0,25],
+                              ylims=[0,100],
+                              xlabel=None,
+                              ylabel=None):
+    """
+    Plots a line with shaded confidence intervals.
+    
+    Parameters:
+    -----------
+    x : np.array, 
+        The x data
+        
+    y : np.array, 
+        The y data.
+        
+    err : np.array, 
+        Error on the y-axis values. This assumes a symmetric error 
+        so bounds of the errors are equal to (y-err, y+err). 
+        
+    ax : matplotlib.Axes (default=None),
+        The axis object data is plotted too.
+    
+    plot_params : dict (default={}),
+        Parameters passed to the plt.plot call.
+    
+    fill_params : dict (default={}),
+        Parameters passed to the plt.fill_between call.
+    
+    xlims : list (default=[0,25]),
+        Limits of the x-axis.
+        
+    ylims : list (default=[0,100]),
+        Limits of the y-axis.
+    
+    xlabel : str (default=None),
+        The x-axis label.
+        
+    ylabel : str (default=None),
+        The y-axis label. 
+        
+    Returns:
+    --------
+    ax : matplotlib.Axes (default=None),
+        The axes instance the data was plotted too.
+    """
+    if ax is None:
+        fig, ax = plt.subplots()
+        
+    ax.plot(x, y, **plot_params)
+    ax.fill_between(x, y-err, y+err, **fill_params)
+
+    # format axis, add labels etc
+    if xlabel is not None:
+        ax.set_xlabel(xlabel)
+    if ylabel is not None:
+        ax.set_ylabel(ylabel)
+                              
+    ax.set_xlim(xlims)
+    ax.set_ylim(ylims)
+                              
+    utils.remove_axes(ax)
+                              
+    return ax
+                              
+def calculate_proportion_error(ps, counts, z=1.96):
+    """
+    Calculates the standard error on a proportion.
+    
+    Parameters:
+    -----------
+    ps : np.array,
+        An array of proportions (i.e., each value is between 0 and 1 and represents
+        the ratio of two classes). A single element is the mean of a binary varible.
+    
+    counts : np.array,
+        The total number of values when calculating each proportion (each element of ps).
+    
+    z : float (default=1.96)
+        Z value for confidence interval. z = 1.96 corresponds to a 95% confidence interval.
+    
+    Returns:
+    -------
+    std_err : np.array,
+        The standard error on each calculated proportions.
+    """
+    return z * ((ps * (1-ps)) / counts)**0.5 
