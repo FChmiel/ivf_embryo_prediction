@@ -76,7 +76,7 @@ def confidence_intervals(scores, alpha=0.95):
     upper = np.percentile(scores, lower_percentile)
     return lower, upper
 
-    def plot_line_with_confidence(x, 
+def plot_line_with_confidence(x, 
                               y, 
                               err, 
                               ax=None, 
@@ -142,7 +142,7 @@ def confidence_intervals(scores, alpha=0.95):
     ax.set_xlim(xlims)
     ax.set_ylim(ylims)
                               
-    utils.remove_axes(ax)
+    remove_axes(ax)
                               
     return ax
                               
