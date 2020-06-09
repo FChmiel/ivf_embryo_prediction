@@ -7,12 +7,12 @@ The models developed in this project were built and validated using the anonymis
 
 # Usage
 
-## Investigating the models predictions
+#### Investigating the models predictions
 If you would like to explore the models predictions we suggest testing the accompanying web application:
 
 [https://fertility-predict.herokuapp.com/](https://fertility-predict.herokuapp.com/)
 
-## Investigating the model development
+#### Investigating the model development
 An example model development process is presented in the jupyter notebook *HFEA_prediction_model.ipynb* included in this repository. It can be viewed [in-browser](https://github.com/FChmiel/ivf_embryo_prediction/blob/master/HFEA_prediction_model.ipynb) or the repo can be cloned locally if you would like to run the model building process.
 
 # Disclaimer
