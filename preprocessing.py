@@ -5,22 +5,29 @@ ivf_embryo_prediction
 ivf_embryo_prediction, Machine-learnt models for predicting chance
 of suitable embryo for D5 transfer or freezing.
 
-Copyright (C) 2020  F. P. Chmiel
+© University of Southampton, IT Innovation Centre, 2020
+
+Copyright in this software belongs to University of Southampt
+University Road, Southampton, SO17 1BJ, UK.
+
+This software may not be used, sold, licensed, transferred, copied
+or reproduced in whole or in part in any manner or form or in or
+on any media by any person other than in accordance with the terms
+of the Licence Agreement supplied with the software, or otherwise
+without the prior written consent of the copyright owners.
+
+This software is distributed WITHOUT ANY WARRANTY, without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE, except where stated in the Licence Agreement supplied with
+the software.
+
+Created Date :          24-06-2020
+
+Created for Project :   Fertility predict
+
+Author: Francis P. Chmiel
 
 Email: F.P.Chmiel@soton.ac.uk
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import pandas as pd
 import numpy as np
@@ -42,6 +49,7 @@ def create_cohort(df):
         The HFEA anonymised register data, edited in-place with
         excluded patients removed.
     """
+    
     # exclude DI cycles
     DI_cycles = df['Type of treatment - IVF or DI']=='DI'
     df = df[~DI_cycles]
@@ -116,7 +124,12 @@ def format_columns(df,
     df : pd.DataFrame, 
         The HFEA database edited in-place.
     """
-    
+
+    # re-name poorly formatted column
+    df.rename(columns={'Cause  of Infertility - Tubal disease':
+                       'Cause of Infertility - Tubal disease'},
+              inplace=True)
+
     # strip whitespace from string columns
     for col in str_cols:
         df[col] = df[col].str.strip()
